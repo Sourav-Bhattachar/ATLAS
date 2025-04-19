@@ -56,3 +56,5 @@ This codebase represents "Atlas", a voice-activated AI assistant with a rich GUI
 - Listening state visualization  
 - Typing effect animations  
 - Glowing microphone border
+
+
