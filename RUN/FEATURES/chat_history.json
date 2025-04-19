@@ -1,0 +1,332 @@
+[
+  {
+    "time": "18-04-2025                                  12:21:44 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's a nice conversation, Have a good day"
+  },
+  {
+    "time": "18-04-2025                                  12:31:56 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's been a pleasure. Have a good night"
+  },
+  {
+    "time": "18-04-2025                                  12:34:03 AM",
+    "user": "exit",
+    "bot": "Thank you sir, it's nice conversation. Have a good night."
+  },
+  {
+    "time": "18-04-2025                                  12:39:42 AM",
+    "user": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "bot": "Many b's.\n"
+  },
+  {
+    "time": "18-04-2025                                  12:44:20 AM",
+    "user": "what is my internet speed",
+    "bot": "Starting internet speed test, please wait..."
+  },
+  {
+    "time": "18-04-2025                                  12:44:50 AM",
+    "user": "what is my internet speed",
+    "bot": "Speed Test Completed!\nDownload speed: 32.34 Mbps\nUpload speed: 0.89 Mbps"
+  },
+  {
+    "time": "18-04-2025                                  12:45:22 AM",
+    "user": "let's try to speed test my internet",
+    "bot": "Run a speed test on Ookla's Speedtest.net.\n"
+  },
+  {
+    "time": "18-04-2025                                  12:45:36 AM",
+    "user": "what is my internet speed",
+    "bot": "Starting internet speed test, please wait..."
+  },
+  {
+    "time": "18-04-2025                                  12:46:02 AM",
+    "user": "what is my internet speed",
+    "bot": "Speed Test Completed!\nDownload speed: 25.50 Mbps\nUpload speed: 0.60 Mbps"
+  },
+  {
+    "time": "18-04-2025                                  12:46:44 AM",
+    "user": "what is my internet speed",
+    "bot": "Speed Test Completed!\nDownload speed: 21.46 Mbps\nUpload speed: 0.56 Mbps"
+  },
+  {
+    "time": "18-04-2025                                  12:51:26 AM",
+    "user": "how r u",
+    "bot": "I'm a large language model, doing well, thank you.\n"
+  },
+  {
+    "time": "18-04-2025                                  12:51:36 AM",
+    "user": "what ise your name",
+    "bot": "My name is Atlas, your personal assistant. How can I help you today?"
+  },
+  {
+    "time": "18-04-2025                                  12:51:52 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good night."
+  },
+  {
+    "time": "18-04-2025                                  12:57:47 AM",
+    "user": "hi",
+    "bot": "Hi there! How can I help you today?\n"
+  },
+  {
+    "time": "18-04-2025                                  12:58:07 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good night."
+  },
+  {
+    "time": "18-04-2025                                  01:01:58 AM",
+    "user": "what is my internet speed",
+    "bot": "Starting internet speed test, please wait..."
+  },
+  {
+    "time": "18-04-2025                                  01:02:28 AM",
+    "user": "what is my internet speed",
+    "bot": "Starting internet speed test, please wait..."
+  },
+  {
+    "time": "18-04-2025                                  01:03:20 AM",
+    "user": "what is the country details of Russia",
+    "bot": "Country Name: Russia.\nOfficial Name: Russian Federation.\nCapital: Moscow.\nRegion: Europe.\nSubregion: Eastern Europe.\nPopulation: 144104080.\nArea: 17098242.0 square kilo meters.\nLanguages: ['Russian'].\nCurrencies: ['Russian ruble'].\nBorders: ['AZE', 'BLR', 'CHN', 'EST', 'FIN', 'GEO', 'KAZ', 'PRK', 'LVA', 'LTU', 'MNG', 'NOR', 'POL', 'UKR']."
+  },
+  {
+    "time": "18-04-2025                                  01:03:32 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good night."
+  },
+  {
+    "time": "18-04-2025                                  01:20:24 AM",
+    "user": "remind me in 15 minutes",
+    "bot": "Invalid reminder format. Please use: 'remind me in X minutes to Y'"
+  },
+  {
+    "time": "18-04-2025                                  01:20:39 AM",
+    "user": "remind me 15 minutes to 20 minutes",
+    "bot": "Invalid reminder format. Please use: 'remind me in X minutes to Y'"
+  },
+  {
+    "time": "18-04-2025                                  01:20:58 AM",
+    "user": "remind me 1:22 130",
+    "bot": "Invalid reminder format. Please use: 'remind me in X minutes to Y'"
+  },
+  {
+    "time": "18-04-2025                                  01:21:28 AM",
+    "user": "please remind me in 15 minutes",
+    "bot": "Invalid reminder format. Please use: 'remind me in X minutes to Y'"
+  },
+  {
+    "time": "18-04-2025                                  01:22:00 AM",
+    "user": "tell me a joke",
+    "bot": "Here's a joke:\nI bought some shoes from a drug dealer. I don't know what he laced them with, but I was tripping all day!"
+  },
+  {
+    "time": "18-04-2025                                  01:22:29 AM",
+    "user": "what is my system information",
+    "bot": "System Information:\n\ud83d\udda5\ufe0f CPU Usage: 0.0%\n\ud83e\udde0 RAM Usage: 85.0%\n\ud83d\udcbe Disk Usage: 63.7%\n\u23f0 Last Boot: 2025-04-17 17:36:35"
+  },
+  {
+    "time": "18-04-2025                                  01:23:46 AM",
+    "user": "remind me in 15 minutes to check the oven",
+    "bot": "Reminder set for 15 minutes from now: check the oven"
+  },
+  {
+    "time": "18-04-2025                                  01:24:08 AM",
+    "user": "remind me in 1 minutes to check the oven",
+    "bot": "Reminder set for 1 minutes from now: check the oven"
+  },
+  {
+    "time": "18-04-2025                                  01:26:38 AM",
+    "user": "what is my system information",
+    "bot": "System Information:\nCPU Usage: 0.0%\nRAM Usage: 84.7%\nDisk Usage: 63.7%\nLast Boot: 2025-04-17 17:36:34"
+  },
+  {
+    "time": "18-04-2025                                  01:27:15 AM",
+    "user": "please shut down the",
+    "bot": "Please provide the system or process you want shut down.\n"
+  },
+  {
+    "time": "18-04-2025                                  01:27:27 AM",
+    "user": "please shut down the system",
+    "bot": "Thank you sir, it's a nice conversation, Have a good night"
+  },
+  {
+    "time": "18-04-2025                                  07:34:23 AM",
+    "user": "click my photo",
+    "bot": "Ok sir, please wait for a moment, I am taking your photo.\nPress any key to save and close the window"
+  },
+  {
+    "time": "18-04-2025                                  07:35:15 AM",
+    "user": "what is the country details of China",
+    "bot": "Country Name: China.\nOfficial Name: People's Republic of China.\nCapital: Beijing.\nRegion: Asia.\nSubregion: Eastern Asia.\nPopulation: 1402112000.\nArea: 9706961.0 square kilo meters.\nLanguages: ['Chinese'].\nCurrencies: ['Chinese yuan'].\nBorders: ['AFG', 'BTN', 'MMR', 'HKG', 'IND', 'KAZ', 'NPL', 'PRK', 'KGZ', 'LAO', 'MAC', 'MNG', 'PAK', 'RUS', 'TJK', 'VNM']."
+  },
+  {
+    "time": "18-04-2025                                  07:36:15 AM",
+    "user": "what is the good quality of China",
+    "bot": "Rich history, diverse culture, rapid economic growth, technological advancements.\n"
+  },
+  {
+    "time": "18-04-2025                                  07:37:12 AM",
+    "user": "what is the country details of India",
+    "bot": "Country Name: India.\nOfficial Name: Republic of India.\nCapital: New Delhi.\nRegion: Asia.\nSubregion: Southern Asia.\nPopulation: 1380004385.\nArea: 3287590.0 square kilo meters.\nLanguages: ['English', 'Hindi', 'Tamil'].\nCurrencies: ['Indian rupee'].\nBorders: ['BGD', 'BTN', 'MMR', 'CHN', 'NPL', 'PAK']."
+  },
+  {
+    "time": "18-04-2025                                  07:39:22 AM",
+    "user": "let's play a game",
+    "bot": "Ok, let's play a random snake game...\nPlease wait..."
+  },
+  {
+    "time": "18-04-2025                                  07:40:18 AM",
+    "user": "let's play a flappy bird game",
+    "bot": "Ok, let's play a Flappy Bird game...\nPlease wait..."
+  },
+  {
+    "time": "18-04-2025                                  07:41:33 AM",
+    "user": "please turn the volume up for",
+    "bot": "Error: invalid literal for int() with base 10: ''"
+  },
+  {
+    "time": "18-04-2025                                  07:41:44 AM",
+    "user": "please turn the volume up",
+    "bot": "Ok sir, turning the volume up for 5"
+  },
+  {
+    "time": "18-04-2025                                  07:48:34 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good day."
+  },
+  {
+    "time": "18-04-2025                                  08:49:56 AM",
+    "user": "what is the date today",
+    "bot": "Curren date is: 2025 - 04 - 18"
+  },
+  {
+    "time": "18-04-2025                                  08:50:38 AM",
+    "user": "what is the date today",
+    "bot": "Curren date is: 2025-04-18"
+  },
+  {
+    "time": "18-04-2025                                  08:51:47 AM",
+    "user": "remind me in 1 minute to check me the school",
+    "bot": "Reminder set for 1 minutes from now: check me the school"
+  },
+  {
+    "time": "18-04-2025                                  08:52:27 AM",
+    "user": "who is Shreya Ghoshal within 1000 words",
+    "bot": "Shreya Ghoshal is one of the most celebrated and recognizable voices in Indian music, renowned for her exceptional vocal range, versatility, and emotional depth.  Her career, spanning over two decades, has seen her conquer various genres, languages, and mediums, establishing her as a leading playback singer in the Indian film industry and a respected figure in the wider world of music.\n\nBorn on March 12, 1984, in Rahara, West Bengal, India, Shreya Ghoshal's musical journey began at a young age.  Her early exposure to classical music through her family, particularly her mother, laid the foundation for her technical prowess.  She received formal training in Hindustani classical music, honing her skills under the guidance of several renowned gurus.  This rigorous training instilled in her a deep understanding of musical theory and a mastery of vocal techniques, which are evident in the precision and control she displays in her singing.\n\nGhoshal's breakthrough came at the age of 16 when she participated in the reality television show *Sa Re Ga Ma Pa* (a precursor to many similar singing competitions globally).  Her performance on the show showcased her exceptional talent and captivated audiences across India.  She eventually won the competition, catapulting her into the national spotlight and paving the way for her entry into the world of playback singing.\n\nHer film debut was in the 2000 Sanjay Leela Bhansali film *Devdas*.  Her rendition of the iconic song \"Silsila Ye Chahat Ka\" immediately established her as a force to be reckoned with.  The song's haunting melody and Ghoshal's soulful delivery resonated with audiences, and she garnered significant critical acclaim and numerous awards.  This successful launch solidified her position as a sought-after playback singer.\n\nWhat distinguishes Ghoshal from many other singers is her unparalleled versatility.  She seamlessly transitions between genres, effortlessly moving from the classical elegance of songs like \"Silsila Ye Chahat Ka\" to the peppy energy of Bollywood dance numbers and the emotional depth of melancholic melodies.  Her voice possesses a remarkable timbre that carries both power and delicacy, allowing her to express a wide range of emotions with nuance and precision.  This versatility is evident in her extensive repertoire, which includes songs in numerous Indian languages, including Hindi, Bengali, Tamil, Telugu, Kannada, Malayalam, Marathi, and others.  This linguistic flexibility speaks to her adaptability and commitment to her craft.\n\nBeyond her technical skills, Ghoshal is known for her emotive delivery. She doesn't simply sing the notes; she inhabits the emotions of the song, connecting with the audience on a deeply personal level. Her ability to convey a wide spectrum of emotions, from joy and exuberance to sorrow and heartbreak, is what makes her songs so memorable and impactful.\n\nHer work has earned her countless accolades, including multiple National Film Awards, Filmfare Awards, and numerous other prestigious awards.  These awards are a testament to her exceptional talent and the lasting impact of her work on Indian cinema and music.\n\nHer career is not limited to playback singing for films.  She has also released several solo albums, showcasing her versatility and independent artistic vision.  These albums demonstrate her command over different genres and her willingness to explore beyond the confines of typical Bollywood expectations.  Her concerts worldwide have garnered huge audiences, further proving her widespread appeal and influence.\n\nShreya Ghoshal's impact transcends mere musical achievement.  She is a role model for aspiring singers, a testament to the power of talent and hard work.  She represents the best of Indian music, embodying the rich cultural heritage and showcasing its global appeal.  Her continued success and enduring popularity affirm her position as one of the most prominent and influential singers in contemporary Indian music.  She remains a highly sought-after artist, constantly expanding her creative horizons and leaving an indelible mark on the world of music.\n"
+  },
+  {
+    "time": "18-04-2025                                  08:53:01 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good day."
+  },
+  {
+    "time": "18-04-2025                                  09:01:28 AM",
+    "user": "increase the brightness",
+    "bot": "Brightness increased to 95%"
+  },
+  {
+    "time": "18-04-2025                                  09:01:52 AM",
+    "user": "increase the brightness",
+    "bot": "Brightness increased to 80%"
+  },
+  {
+    "time": "18-04-2025                                  09:02:33 AM",
+    "user": "increase the brightness",
+    "bot": "Brightness increased to 100%"
+  },
+  {
+    "time": "18-04-2025                                  09:02:52 AM",
+    "user": "increase the brightness",
+    "bot": "Brightness increased to 52%"
+  },
+  {
+    "time": "18-04-2025                                  09:03:01 AM",
+    "user": "increase the brightness",
+    "bot": "Brightness increased to 100%"
+  },
+  {
+    "time": "18-04-2025                                  12:47:15 PM",
+    "user": "hi how are you",
+    "bot": "I'm doing well, thank you!  How are you?\n"
+  },
+  {
+    "time": "18-04-2025                                  12:47:29 PM",
+    "user": "what is your name",
+    "bot": "My name is Atlas, your personal assistant. How can I help you today?"
+  },
+  {
+    "time": "18-04-2025                                  12:47:43 PM",
+    "user": "what is my internet",
+    "bot": "Your internet speed and type depend on your plan and location.\n"
+  },
+  {
+    "time": "18-04-2025                                  12:47:57 PM",
+    "user": "what is my internet speed",
+    "bot": "Starting internet speed test, please wait..."
+  },
+  {
+    "time": "18-04-2025                                  12:48:26 PM",
+    "user": "what is my internet speed",
+    "bot": "Speed Test Completed!\nDownload speed: 9.32 Mbps\nUpload speed: 0.15 Mbps"
+  },
+  {
+    "time": "18-04-2025                                  12:48:47 PM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good day."
+  },
+  {
+    "time": "18-04-2025                                  02:43:28 PM",
+    "user": "hi how are you",
+    "bot": "I'm doing well, thank you!  How are you?\n"
+  },
+  {
+    "time": "18-04-2025                                  02:43:40 PM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good day."
+  },
+  {
+    "time": "18-04-2025                                  04:13:53 PM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's nice conversation. Have a good day."
+  },
+  {
+    "time": "18-04-2025                                  04:40:52 PM",
+    "user": "exit",
+    "bot": "Thank you sir, it's nice conversation. Have a good day."
+  },
+  {
+    "time": "19-04-2025                                  08:44:26 AM",
+    "user": "please turn the volume down for 10",
+    "bot": "Ok sir, turning the volume down for 10"
+  },
+  {
+    "time": "19-04-2025                                  08:46:14 AM",
+    "user": "what is the date today",
+    "bot": "Curren date is: 2025-04-19"
+  },
+  {
+    "time": "19-04-2025                                  08:46:39 AM",
+    "user": "remember that you are nothing a good boy and I am also a good",
+    "bot": "You told me to remember that: i am nothing a good boy and you are also a good"
+  },
+  {
+    "time": "19-04-2025                                  08:47:00 AM",
+    "user": "what do you remember",
+    "bot": "You told me to remember that: i am a good boy\ni am a good boy you are also a good boy and your father also a good boy and your mother\ni am nothing a good boy and you are also a good\n"
+  },
+  {
+    "time": "19-04-2025                                  08:47:41 AM",
+    "user": "tell me a joke",
+    "bot": "Here's a joke:\n\"Honey, go to the store and buy some eggs.\"\n\"OK.\"\n\"Oh and while you're there, get some milk.\"\nHe never returned."
+  },
+  {
+    "time": "19-04-2025                                  10:02:45 AM",
+    "user": "what is the country details of India",
+    "bot": "Country Name: India.\nOfficial Name: Republic of India.\nCapital: New Delhi.\nRegion: Asia.\nSubregion: Southern Asia.\nPopulation: 1380004385.\nArea: 3287590.0 square kilo meters.\nLanguages: ['English', 'Hindi', 'Tamil'].\nCurrencies: ['Indian rupee'].\nBorders: ['BGD', 'BTN', 'MMR', 'CHN', 'NPL', 'PAK']."
+  },
+  {
+    "time": "19-04-2025                                  10:03:03 AM",
+    "user": "good bye",
+    "bot": "Thank you sir, it's a nice conversation, have a good day."
+  }
+]
