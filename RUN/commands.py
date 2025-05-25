@@ -46,21 +46,23 @@ from RUN.FEATURES.system_shut_down import shut_down
 from RUN.FEATURES.system_restart import restart
 from RUN.FEATURES.system_sleep import sleep
 from RUN.FEATURES.lock_screen import lock
-
 JOKE_API_URL = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single"
 
 def takeCommand():
     r = speech_recognition.Recognizer()
+
     with speech_recognition.Microphone() as source:
         print("Listening...")
         r.energy_threshold = 2
         r.pause_threshold = 1
         audio = r.listen(source,0,4)
+
     try:
         print("Understanding...")
         query  = r.recognize_google(audio,language='en-in')
         print(f"You Said: {query}\n")
         time.sleep(2)
+
     except Exception as e:
         print("Say that again")
         return "None"
@@ -81,6 +83,7 @@ class CommandHandler:
         year = None
         month = None
         year_matches = re.findall(r'\b\d{4}\b', query)
+
         if year_matches:
             year = int(year_matches[0])
         months = {
@@ -89,6 +92,7 @@ class CommandHandler:
             'september': 9, 'october': 10, 'november': 11, 'december': 12
         }
         for month_name, month_num in months.items():
+
             if month_name in query:
                 month = month_num
                 break
@@ -100,6 +104,7 @@ class CommandHandler:
             query,
             re.IGNORECASE
         )
+
         if not match:
             match = re.search(
                 r'periodic\s+table\s+(?:of\s+)?(.+)',
@@ -110,6 +115,7 @@ class CommandHandler:
 
     def get_symbol_from_name(self, element_name):
         for elem in periodictable.elements:
+
             if elem.name.lower() == element_name.lower():
                 return elem.symbol
         return None
@@ -137,8 +143,10 @@ class CommandHandler:
         label.pack(padx=10, pady=10)
 
     def set_reminder(self, text):
+
         try:
             match = re.search(r'in (\d+) minutes? to (.*)', text)
+
             if not match:
                 return "Invalid reminder format. Please use: 'remind me in X minutes to Y'"
             minutes = int(match.group(1))
@@ -148,9 +156,12 @@ class CommandHandler:
                 'time': reminder_time.strftime("%Y-%m-%d %H:%M:%S"),
                 'message': message
             }
+
             if not os.path.exists(self.reminders_file):
+
                 with open(self.reminders_file, 'w') as f:
                     json.dump([], f)
+
             with open(self.reminders_file, 'r+') as f:
                 reminders = json.load(f)
                 reminders.append(reminder)
@@ -158,22 +169,28 @@ class CommandHandler:
                 json.dump(reminders, f)
             self.start_reminder_checker()
             return f"Reminder set for {minutes} minutes from now: {message}"
+
         except Exception as e:
             return f"Error setting reminder: {str(e)}"
 
     def start_reminder_checker(self):
 
         def check_reminders():
+
             try:
+
                 with open(self.reminders_file, 'r') as f:
                     reminders = json.load(f)
                 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 for reminder in reminders[:]:
+
                     if reminder['time'] <= now:
                         self.atlas.speak(f"Reminder: {reminder['message']}")
                         reminders.remove(reminder)
+
                 with open(self.reminders_file, 'w') as f:
                     json.dump(reminders, f)
+
             except Exception as e:
                 print(f"Reminder check error: {str(e)}")
         schedule.every(1).minutes.do(check_reminders)
@@ -185,14 +202,17 @@ class CommandHandler:
             time.sleep(1)
 
     def tell_joke(self):
+
         try:
             response = requests.get(JOKE_API_URL)
             joke = response.json()['joke']
             return f"Here's a joke:\n{joke}"
+
         except Exception as e:
             return "Why did the joke go to school? To get a little smarter!"
 
     def get_system_info(self):
+
         try:
             info = {
                 'cpu_usage': f"{psutil.cpu_percent()}%",
@@ -205,6 +225,7 @@ class CommandHandler:
                     f"RAM Usage: {info['ram_usage']}\n"
                     f"Disk Usage: {info['disk_usage']}\n"
                     f"Last Boot: {info['boot_time']}")
+
         except Exception as e:
             return f"Couldn't get system info: {str(e)}"
 
@@ -215,18 +236,25 @@ class CommandHandler:
             self.atlas.hotword_active = False
             query = text.lower()
             response_text = ""
+
             try:
+
                 if "on youtube" in query and 'play' in query:
+
                     try:
                         response_text = search_youtube(query)
+
                     except Exception as e:
                         response_text = self.atlas.chat_bot(query)
+
                     finally:
                         self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif "screenshot" in query or "screen shot" in query:
+
                     try:
                         response_text = screen_shot()
                         self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
+
                     except:
                         print("Error in taking screenshot")
                 elif 'video call' in query:
@@ -250,12 +278,15 @@ class CommandHandler:
                     response_text = "All windows minimized"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif 'calendar' in query and ('show' in query or 'open' in query or 'create' in query or 'see' in query or 'generate' in query):
+
                     try:
                         parsed_year, parsed_month = self.parse_calendar_command(query)
+
                         if parsed_year is None:
                             raise ValueError("Please specify a year.")
                         top = tk.Toplevel(self.atlas.root)
                         top.title("Calendar")
+
                         if parsed_month is not None:
                             window_width, window_height = 400, 350
                         else:
@@ -267,15 +298,19 @@ class CommandHandler:
                         top.geometry(f"{window_width}x{window_height}+{x}+{y}")
                         DynamicCalendarApp(top, parsed_year, parsed_month)
                         response_text = f"Opened calendar for {parsed_year}"
+
                         if parsed_month is not None:
                             response_text += f", month {calendar.month_name[parsed_month]}"
                         self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
+
                     except Exception as e:
                         response_text = f"Error: {str(e)}"
                         self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif 'periodic table' in query.lower():
                     element_name = self.extract_element_name(query)
+
                     if element_name:
+
                         try:
                             element = getattr(periodictable, element_name.lower())
                             symbol = element.symbol
@@ -284,6 +319,7 @@ class CommandHandler:
                             density = getattr(element, 'density', None)
                             density_value = f"{density} g/cm³" if density else "N/A"
                             response_text = f"Name {element.name.capitalize()}.\n Atomic Number: {element.number}.\n Atomic Mass: {element.mass:.3f} amu.\n Density: {density_value}."
+
                         except AttributeError:
                             response_text = f"Element '{element_name}' not found in periodic table"
                     else:
@@ -313,6 +349,7 @@ class CommandHandler:
                         threading.Thread(target=self._take_message_command, args=(contact_name,), daemon=True
                     ).start()])
                 elif "internet speed" in query or "network speed" in query:
+
                     try:
                         top = tk.Toplevel(self.atlas.root)
                         top.title("Internet Speed Test")
@@ -338,6 +375,7 @@ class CommandHandler:
                         InternetSpeedometer(top, speed_test_callback)
                         response_text = "Starting internet speed test, please wait..."
                         self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
+
                     except Exception as e:
                         response_text = f"Speed test failed: {str(e)}"
                         self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
@@ -353,34 +391,43 @@ class CommandHandler:
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif 'play a game' in query or 'play the game' in query or 'play some game' in query or 'try some game' in query or 'try a game' in query or 'try the game' in query:
                     game_choice = random.choice(['snake_game', 'flappy_game'])
+
                     if game_choice == 'snake_game':
+
                         try:
                             game_process = Process(target=snake_game)
                             game_process.start()
                             response_text = "Ok, let's play a random snake game...\nPlease wait..."
+
                         except Exception as e:
                             response_text = f"Couldn't start snake game: {str(e)}"
                     else:
+
                         try:
                             game_process = Process(target=flappy_game)
                             game_process.start()
                             response_text = "Ok, let's play a random Flappy Bird game...\nPlease wait..."
+
                         except Exception as e:
                             response_text = f"Couldn't start Flappy Bird game: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif 'play the snake game' in query or 'play a snake game' in query:
+
                     try:
                         game_process = Process(target=snake_game)
                         game_process.start()
                         response_text = "Ok, let's play a snake game...\nPlease wait..."
+
                     except Exception as e:
                         response_text = f"Couldn't start game: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif "flappy bird game" in query:
+
                     try:
                         game_process = Process(target=flappy_game)
                         game_process.start()
                         response_text = "Ok, let's play a Flappy Bird game...\nPlease wait..."
+
                     except Exception as e:
                         response_text = f"Couldn't start game: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
@@ -422,9 +469,11 @@ class CommandHandler:
                     words_to_remove = ['atlas','please','turn', 'tern', 'the','to', 'on', 'volume', 'up','for']
                     query = remove_words(query, words_to_remove)
                     query = int(query)
+
                     try:
                         response_text = f'Ok sir, turning the volume up for {query}'
                         pyautogui.press('volumeup',int(query/2))
+
                     except:
                         response_text = f'Ok sir, turning the volume up for 5'
                         pyautogui.press('volumeup',5)
@@ -437,9 +486,11 @@ class CommandHandler:
                     words_to_remove = ['atlas','please','turn', 'tern', 'the','to', 'on', 'volume', 'down', 'for']
                     query = remove_words(query, words_to_remove)
                     query = int(query)
+
                     try:
                         response_text = f'Ok sir, turning the volume down for {query}'
                         pyautogui.press('volumedown',int(query/2))
+
                     except:
                         response_text = f'Ok sir, turning the volume down for 5'
                         pyautogui.press('volumedown',5)
@@ -449,8 +500,10 @@ class CommandHandler:
                     pyautogui.press('volumedown',5)
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif ('increase' in query or 'up' in query) and 'brightness' in query:
+
                     try:
                         current = sbc.get_brightness()
+
                         if current:
                             current = current[0]
                             new = min(current + 10, 100)
@@ -458,12 +511,15 @@ class CommandHandler:
                             response_text = f"Brightness increased to {new}%"
                         else:
                             response_text = "Could not retrieve current brightness"
+
                     except Exception as e:
                         response_text = f"Failed to increase brightness: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif ('decrease' in query or 'down' in query) and 'brightness' in query:
+
                     try:
                         current = sbc.get_brightness()
+
                         if current:
                             current = current[0]
                             new = max(current - 10, 0)
@@ -471,6 +527,7 @@ class CommandHandler:
                             response_text = f"Brightness decreased to {new}%"
                         else:
                             response_text = "Could not retrieve current brightness"
+
                     except Exception as e:
                         response_text = f"Failed to decrease brightness: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
@@ -483,6 +540,7 @@ class CommandHandler:
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
 
                     def display_flag(image_url):
+
                         try:
                             response = requests.get(image_url)
                             img_data = response.content
@@ -491,8 +549,10 @@ class CommandHandler:
                             photo = ImageTk.PhotoImage(img)
                             self.atlas.root.after(0, lambda:
                                 self.create_flag_window(photo, query))
+
                         except Exception as e:
                             print(f"Error loading flag: {e}")
+
                     if flag_url:
                         threading.Thread(target=display_flag,args=(flag_url,), daemon=True).start()
                     else:
@@ -502,6 +562,7 @@ class CommandHandler:
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif ('charge' in query or 'power' in query or 'battery' in query) and ('laptop' in query or 'pc' in query or 'desktop' in query or 'computer' in query):
                     battery = psutil.sensors_battery()
+
                     if battery is None:
                         response_text = ("No battery information found")
                     percent = battery.percent
@@ -524,10 +585,12 @@ class CommandHandler:
                     response_text = self.get_system_info()
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif "click my photo" in query or "take my photo" in query or "take a photo" in query or "click a photo" in query:
+
                     try:
                         photo_taking_process = Process(target=take_photo)
                         photo_taking_process.start()
                         response_text = "Ok sir, please wait for a moment, I am taking your photo.\nPress any key to save and close the window"
+
                     except Exception as e:
                         response_text = f"Couldn't start game: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
@@ -547,6 +610,7 @@ class CommandHandler:
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif 'clear' in query and 'memory' in query:
                     response_text = "Memory cleared"
+
                     with open(r"RUN\FEATURES\Remember.txt", "w") as file:
                         file.write("")
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
@@ -556,6 +620,7 @@ class CommandHandler:
                 elif "exit" in query or "good bye" in query or "goodbye" in query or "bye" in query:
                     now = datetime.datetime.now()
                     current_time = now.time()
+
                     if current_time >= datetime.time(22, 0) or current_time < datetime.time(5, 0):
                         response_text = "Thank you sir, it's a nice conversation, have a good night."
                     else:
@@ -571,46 +636,57 @@ class CommandHandler:
                 elif ("shutdown" in query or 'shut down' in query )and ('system' in query or 'pc' in query or 'laptop' in query or 'computer' in query or 'desktop' in query or 'screen' in query):
                     now = datetime.datetime.now()
                     current_time = now.time()
+
                     try:
                         shutdown_process = Process(target=shut_down)
                         shutdown_process.start()
+
                         if current_time >= datetime.time(22, 0) or current_time < datetime.time(5, 0):
                             response_text = ("Thank you sir, it's a nice conversation, Have a good night")
                         else:
                             response_text = ("Thank you sir, it's a nice conversation, Have a good day")
+
                     except Exception as e:
                         response_text = f"Couldn't shutdown: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif ("restart" in query or "re start" in query) and ('system' in query or 'pc' in query or 'laptop' in query or 'computer' in query or 'desktop' in query or 'screen' in query):
+
                     try:
                         restart_process = Process(target=restart)
                         restart_process.start()
                         response_text = "Thank You sir, please wait for me, I am restarting your system"
+
                     except Exception as e:
                         response_text = f"Couldn't restart: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif "sleep" in query and ('system' in query or 'pc' in query or 'laptop' in query or 'computer' in query or 'desktop' in query or 'screen' in query):
+
                     try:
                         sleep_process = Process(target=sleep)
                         sleep_process.start()
                         response_text = 'Ok sir, the system is sleeping...'
+
                     except Exception as e:
                         response_text = f"Couldn't sleep: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 elif 'lock' in query and ('system' in query or 'pc' in query or 'laptop' in query or 'computer' in query or 'desktop' in query or 'screen' in query):
+
                     try:
                         lock_process = Process(target=lock)
                         lock_process.start()
                         response_text = 'Ok sir, the system is locking...'
+
                     except Exception as e:
                         response_text = f"Couldn't lock: {str(e)}"
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
                 else:
                     response_text = self.atlas.chat_bot(query)
                     self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
+
             except Exception as e:
                 response_text = f"Error: {str(e)}"
                 self.atlas.root.after(10, self.atlas.update_chat_history, text, response_text)
+
             if len(response_text.split()) >= 1:
                 self.atlas.root.after(10, lambda: [
                     self.atlas.create_fullscreen_text(),
