@@ -8,56 +8,48 @@ from itertools import cycle
 from typing import List, Optional
 import pygame
 from pygame.locals import K_ESCAPE, K_SPACE, K_UP, KEYDOWN, QUIT
-
-# Constants
 PLAYERS = (
-    # red bird
     (
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/redbird-upflap.png",
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/redbird-midflap.png",
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/redbird-downflap.png",
     ),
-    # blue bird
     (
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/bluebird-upflap.png",
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/bluebird-midflap.png",
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/bluebird-downflap.png",
     ),
-    # yellow bird
     (
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/yellowbird-upflap.png",
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/yellowbird-midflap.png",
         "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/yellowbird-downflap.png",
     ),
 )
-
 BACKGROUNDS = (
     "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/background-day.png",
     "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/background-night.png",
 )
-
 PIPES = (
     "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/pipe-green.png",
     "ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/sprites/pipe-red.png",
 )
 
-# Utility Functions
 def clamp(n: float, minn: float, maxn: float) -> float:
     return max(min(maxn, n), minn)
 
 def memoize(func):
     cache = {}
-
     @wraps(func)
+
     def wrapper(*args, **kwargs):
         key = (args, frozenset(kwargs.items()))
+
         if key not in cache:
             cache[key] = func(*args, **kwargs)
         return cache[key]
-
     return wrapper
-
 @memoize
+
 def get_hit_mask(image: pygame.Surface) -> List[List[bool]]:
     return list(
         (
@@ -78,17 +70,20 @@ def pixel_collision(
     hitmask2: List[List[bool]],
 ):
     rect = rect1.clip(rect2)
+
     if rect.width == 0 or rect.height == 0:
         return False
     x1, y1 = rect.x - rect1.x, rect.y - rect1.y
     x2, y2 = rect.x - rect2.x, rect.y - rect2.y
     for x in range(rect.width):
         for y in range(rect.height):
+
             if hitmask1[x1 + x][y1 + y] and hitmask2[x2 + x][y2 + y]:
                 return True
     return False
 
 class Window:
+
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -104,6 +99,7 @@ class Window:
         self.vr = self.vw / self.vh
 
 class GameConfig:
+
     def __init__(
         self,
         screen: pygame.Surface,
@@ -125,6 +121,7 @@ class GameConfig:
         self.clock.tick(self.fps)
 
 class Images:
+
     def __init__(self) -> None:
         self.numbers = list(
             (
@@ -157,7 +154,9 @@ class Images:
         )
 
 class Sounds:
+
     def __init__(self) -> None:
+
         if "win" in sys.platform:
             ext = "wav"
         else:
@@ -169,6 +168,7 @@ class Sounds:
         self.wing = pygame.mixer.Sound(f"ATLAS_UI_VIDEO_AUDIO/Flappy_bird_game_assets/audio/wing.{ext}")
 
 class Entity:
+
     def __init__(
         self,
         config: GameConfig,
@@ -182,6 +182,7 @@ class Entity:
         self.config = config
         self.x = x
         self.y = y
+
         if w or h:
             self.w = w or config.window.ratio * h
             self.h = h or w / config.window.ratio
@@ -198,20 +199,21 @@ class Entity:
         self.hit_mask = get_hit_mask(image)
         self.w = w or (image.get_width() if image else 0)
         self.h = h or (image.get_height() if image else 0)
-
     @property
+
     def cx(self) -> float:
         return self.x + self.w / 2
-
     @property
+
     def cy(self) -> float:
         return self.y + self.h / 2
-
     @property
+
     def rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.w, self.h)
 
     def collide(self, other) -> bool:
+
         if not self.hit_mask or not other.hit_mask:
             return self.rect.colliderect(other.rect)
         return pixel_collision(self.rect, other.rect, self.hit_mask, other.hit_mask)
@@ -219,6 +221,7 @@ class Entity:
     def tick(self) -> None:
         self.draw()
         rect = self.rect
+
         if self.config.debug:
             pygame.draw.rect(self.config.screen, (255, 0, 0), rect, 1)
             font = pygame.font.SysFont("Arial", 13, True)
@@ -236,10 +239,12 @@ class Entity:
             )
 
     def draw(self) -> None:
+
         if self.image:
             self.config.screen.blit(self.image, self.rect)
 
 class Background(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         super().__init__(
             config,
@@ -251,6 +256,7 @@ class Background(Entity):
         )
 
 class Floor(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         super().__init__(config, config.images.base, 0, config.window.vh)
         self.vel_x = 4
@@ -264,6 +270,7 @@ class Floor(Entity):
         super().draw()
 
 class GameOver(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         super().__init__(
             config=config,
@@ -273,6 +280,7 @@ class GameOver(Entity):
         )
 
 class Pipe(Entity):
+
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.vel_x = -5
@@ -282,6 +290,7 @@ class Pipe(Entity):
         super().draw()
 
 class Pipes(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         super().__init__(config)
         self.pipe_gap = 120
@@ -292,6 +301,7 @@ class Pipes(Entity):
         self.spawn_initial_pipes()
 
     def tick(self) -> None:
+
         if self.can_spawn_pipes():
             self.spawn_new_pipes()
         self.remove_old_pipes()
@@ -305,6 +315,7 @@ class Pipes(Entity):
 
     def can_spawn_pipes(self) -> bool:
         last = self.upper[-1]
+
         if not last:
             return True
         return self.config.window.width - (last.x + last.w) > last.w * 2.5
@@ -316,9 +327,11 @@ class Pipes(Entity):
 
     def remove_old_pipes(self):
         for pipe in self.upper:
+
             if pipe.x < -pipe.w:
                 self.upper.remove(pipe)
         for pipe in self.lower:
+
             if pipe.x < -pipe.w:
                 self.lower.remove(pipe)
 
@@ -360,6 +373,7 @@ class PlayerMode(Enum):
     CRASH = "CRASH"
 
 class Player(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         image = config.images.player[0]
         x = int(config.window.width * 0.2)
@@ -376,6 +390,7 @@ class Player(Entity):
 
     def set_mode(self, mode: PlayerMode) -> None:
         self.mode = mode
+
         if mode == PlayerMode.NORMAL:
             self.reset_vals_normal()
             self.config.sounds.wing.play()
@@ -384,6 +399,7 @@ class Player(Entity):
         elif mode == PlayerMode.CRASH:
             self.stop_wings()
             self.config.sounds.hit.play()
+
             if self.crash_entity == "pipe":
                 self.config.sounds.die.play()
             self.reset_vals_crash()
@@ -420,6 +436,7 @@ class Player(Entity):
 
     def update_image(self):
         self.frame += 1
+
         if self.frame % 5 == 0:
             self.img_idx = next(self.img_gen)
             self.image = self.config.images.player[self.img_idx]
@@ -427,24 +444,30 @@ class Player(Entity):
         self.h = self.image.get_height()
 
     def tick_shm(self) -> None:
+
         if self.vel_y >= self.max_vel_y or self.vel_y <= self.min_vel_y:
             self.acc_y *= -1
         self.vel_y += self.acc_y
         self.y += self.vel_y
 
     def tick_normal(self) -> None:
+
         if self.vel_y < self.max_vel_y and not self.flapped:
             self.vel_y += self.acc_y
+
         if self.flapped:
             self.flapped = False
         self.y = clamp(self.y + self.vel_y, self.min_y, self.max_y)
         self.rotate()
 
     def tick_crash(self) -> None:
+
         if self.min_y <= self.y <= self.max_y:
             self.y = clamp(self.y + self.vel_y, self.min_y, self.max_y)
+
             if self.crash_entity != "floor":
                 self.rotate()
+
         if self.vel_y < self.max_vel_y:
             self.vel_y += self.acc_y
 
@@ -453,6 +476,7 @@ class Player(Entity):
 
     def draw(self) -> None:
         self.update_image()
+
         if self.mode == PlayerMode.SHM:
             self.tick_shm()
         elif self.mode == PlayerMode.NORMAL:
@@ -470,6 +494,7 @@ class Player(Entity):
         self.img_gen = cycle([self.img_idx])
 
     def flap(self) -> None:
+
         if self.y > self.min_y:
             self.vel_y = self.flap_acc
             self.flapped = True
@@ -480,16 +505,19 @@ class Player(Entity):
         return pipe.cx <= self.cx < pipe.cx - pipe.vel_x
 
     def collided(self, pipes: Pipes, floor: Floor) -> bool:
+
         if self.collide(floor):
             self.crashed = True
             self.crash_entity = "floor"
             return True
         for pipe in pipes.upper:
+
             if self.collide(pipe):
                 self.crashed = True
                 self.crash_entity = "pipe"
                 return True
         for pipe in pipes.lower:
+
             if self.collide(pipe):
                 self.crashed = True
                 self.crash_entity = "pipe"
@@ -497,6 +525,7 @@ class Player(Entity):
         return False
 
 class Score(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         super().__init__(config)
         self.y = self.config.window.height * 0.1
@@ -508,8 +537,8 @@ class Score(Entity):
     def add(self) -> None:
         self.score += 1
         self.config.sounds.point.play()
-
     @property
+
     def rect(self) -> pygame.Rect:
         score_digits = [int(x) for x in list(str(self.score))]
         images = [self.config.images.numbers[digit] for digit in score_digits]
@@ -528,6 +557,7 @@ class Score(Entity):
             x_offset += image.get_width()
 
 class WelcomeMessage(Entity):
+
     def __init__(self, config: GameConfig) -> None:
         image = config.images.welcome_message
         super().__init__(
@@ -538,6 +568,7 @@ class WelcomeMessage(Entity):
         )
 
 class Flappy:
+
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("Flappy Bird")
@@ -552,7 +583,6 @@ class Flappy:
             images=images,
             sounds=Sounds(),
         )
-
     async def start(self):
         while True:
             self.background = Background(self.config)
@@ -565,12 +595,12 @@ class Flappy:
             await self.splash()
             await self.play()
             await self.game_over()
-
     async def splash(self):
         self.player.set_mode(PlayerMode.SHM)
         while True:
             for event in pygame.event.get():
                 self.check_quit_event(event)
+
                 if self.is_tap_event(event):
                     return
             self.background.tick()
@@ -582,6 +612,7 @@ class Flappy:
             self.config.tick()
 
     def check_quit_event(self, event):
+
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             pygame.quit()
             sys.exit()
@@ -591,18 +622,20 @@ class Flappy:
         space_or_up = event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)
         screen_tap = event.type == pygame.FINGERDOWN
         return m_left or space_or_up or screen_tap
-
     async def play(self):
         self.score.reset()
         self.player.set_mode(PlayerMode.NORMAL)
         while True:
+
             if self.player.collided(self.pipes, self.floor):
                 return
             for i, pipe in enumerate(self.pipes.upper):
+
                 if self.player.crossed(pipe):
                     self.score.add()
             for event in pygame.event.get():
                 self.check_quit_event(event)
+
                 if self.is_tap_event(event):
                     self.player.flap()
             self.background.tick()
@@ -613,7 +646,6 @@ class Flappy:
             pygame.display.update()
             await asyncio.sleep(0)
             self.config.tick()
-
     async def game_over(self):
         self.player.set_mode(PlayerMode.CRASH)
         self.pipes.stop()
@@ -621,7 +653,9 @@ class Flappy:
         while True:
             for event in pygame.event.get():
                 self.check_quit_event(event)
+
                 if self.is_tap_event(event):
+
                     if self.player.y + self.player.h >= self.floor.y - 1:
                         return
             self.background.tick()
@@ -637,6 +671,6 @@ class Flappy:
 def handle_exit(signal, frame):
     sys.exit(0)
 
-
 def flappy_game():
     asyncio.run(Flappy().start())
+
