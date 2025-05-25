@@ -23,11 +23,9 @@ def close_window(query):
     original_window = gw.getActiveWindow()
 
     try:        
-        # Press Win+X to focus the taskbar window
         p.hotkey('win', str(x))
-        p.sleep(0.5)  # Wait for the window to activate
+        p.sleep(0.5)  
 
-        # Check if the active window changed
         new_window = gw.getActiveWindow()
         if new_window != original_window:
             p.sleep(0.3)
