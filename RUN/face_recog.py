@@ -7,8 +7,6 @@ def authenticate_face(root, container, success_callback):
     recognizer = cv2.face.LBPHFaceRecognizer_create()   #pip uninstall opencv-python opencv-contrib-python
                                                         # pip install opencv-contrib-python
                                                             
-    # recognizer = cv2.face.LBPHFaceRecognizer_create() if hasattr(cv2, 'face') else cv2.ml.LBPHFaceRecognizer_create()
-
     recognizer.read(r'ATLAS_UI_VIDEO_AUDIO\auth\trainer\trainer.yml')
 
     cascadePath = r'ATLAS_UI_VIDEO_AUDIO\auth\haarcascade_frontalface_default.xml'
