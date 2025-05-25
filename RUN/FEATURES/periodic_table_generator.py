@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import periodictable
-
-# Element data: symbol, atomic number, group, period, color
 elements = [
     ("H", 1, 1, 1, "lightgray"), ("He", 2, 18, 1, "lightblue"),
     ("Li", 3, 1, 2, "orange"), ("Be", 4, 2, 2, "orange"),
@@ -54,27 +52,23 @@ elements = [
 ]
 
 def show_element_info(symbol):
+
     try:
         element = getattr(periodictable, symbol.capitalize())
+
     except AttributeError:
         messagebox.showerror("Error", f"Element {symbol} not found!")
         return
 
-    # Create or update info window
     if not hasattr(show_element_info, 'info_window') or not show_element_info.info_window.winfo_exists():
         show_element_info.info_window = tk.Toplevel()
         show_element_info.info_window.title("Element Information")
         show_element_info.info_window.geometry("320x300")
-        
         main_frame = ttk.Frame(show_element_info.info_window, padding=20)
         main_frame.pack(fill='both', expand=True)
-        
-        # Symbol display
         symbol_label = ttk.Label(main_frame, font=('Arial', 48))
         symbol_label.pack(pady=10)
         show_element_info.symbol_label = symbol_label
-        
-        # Property labels
         properties = [
             "Name:", "Atomic Number:", "Atomic Mass:",
             "Density:", "Group:", "Period:", "Electron Configuration:"
@@ -85,31 +79,24 @@ def show_element_info(symbol):
             label.pack(anchor='w', padx=20)
             show_element_info.info_labels.append(label)
     else:
-        # Bring existing window to front
         show_element_info.info_window.lift()
-
-    # Update labels with element data
     show_element_info.symbol_label.config(text=element.symbol)
     show_element_info.info_labels[0].config(text=f"Name: {element.name.capitalize()}")
     show_element_info.info_labels[1].config(text=f"Atomic Number: {element.number}")
     show_element_info.info_labels[2].config(text=f"Atomic Mass: {element.mass:.3f} amu")
-    
     density = getattr(element, 'density', 'N/A')
     show_element_info.info_labels[3].config(text=f"Density: {density} g/cm³" if density else "Density: N/A")
-   
-
 periodic_table_window = None
 
 def create_periodic_table(parent):
     global periodic_table_window
+
     if periodic_table_window is not None and periodic_table_window.winfo_exists():
-        periodic_table_window.lift()  # Bring to front if already open
+        periodic_table_window.lift()
         return periodic_table_window
-    
     periodic_table_window = tk.Toplevel(parent)
     periodic_table_window.title("Chemistry Periodic Table")
     periodic_table_window.configure(bg="#0cf397")
-    
     for symbol, number, col, row, color in elements:
         btn = tk.Button(
             periodic_table_window,
@@ -123,6 +110,4 @@ def create_periodic_table(parent):
             command=lambda s=symbol: show_element_info(s)
         )
         btn.grid(row=row, column=col, padx=2, pady=2)
-    
     return periodic_table_window
-    
