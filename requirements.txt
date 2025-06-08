@@ -1,0 +1,23 @@
+# pip uninstall opencv-python opencv-contrib-python
+# pip install opencv-contrib-python
+Pillow
+pubchempy
+pygame
+pywhatkit
+schedule
+periodictable
+speedtest-cli
+pygetwindow
+pyautogui
+SpeechRecognition
+psutil
+requests
+screen-brightness-control
+opencv-contrib-python
+keyboard
+pyttsx3
+pvporcupine
+pyaudio
+pywin32
+google-generativeai
+playsound==1.2.2
